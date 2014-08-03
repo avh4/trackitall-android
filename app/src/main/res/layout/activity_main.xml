@@ -8,28 +8,18 @@
             android:layout_height="wrap_content">
         <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:text="@string/type_vegetables_label"
                 android:id="@+id/btn_veg"/>
         <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:text="@string/type_fruit_label"
                 android:id="@+id/btn_fruit"/>
         <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:text="@string/type_water_label"
                 android:id="@+id/btn_water"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Carbs"
-                android:id="@+id/btn_carbs"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Insulin"
-                android:id="@+id/btn_insulin"/>
     </LinearLayout>
 </LinearLayout>

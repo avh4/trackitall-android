@@ -42,6 +42,8 @@ public class NotificationBarService extends Service {
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContent(views)
                 .setPriority(Notification.PRIORITY_MIN)
+                .setAutoCancel(false)
+                .setOngoing(true)
                 .build();
 
         DropboxStore.getStore().addSyncStatusListener(new DbxDatastore.SyncStatusListener() {

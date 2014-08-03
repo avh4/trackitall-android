@@ -3,25 +3,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              style="?android:attr/buttonBarStyle"
+              android:layout_height="64dp">
 
     <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/type_vegetables_label"
             android:id="@+id/btn_veg"
+            style="?android:attr/buttonBarButtonStyle"
             />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/type_fruit_label"
             android:id="@+id/btn_fruit"
+            style="?android:attr/buttonBarButtonStyle"
             />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/type_water_label"
             android:id="@+id/btn_water"
+            style="?android:attr/buttonBarButtonStyle"
             />
 
 </LinearLayout>
