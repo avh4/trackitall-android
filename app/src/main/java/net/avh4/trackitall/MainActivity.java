@@ -24,9 +24,9 @@ public class MainActivity extends ActionBarActivity implements DbxDatastore.Sync
         setContentView(R.layout.activity_main);
         startService(new Intent(this, MyService.class));
 
-        things.add(new Thing(this, "vegetables", R.id.btn_veg, R.string.type_vegetables_label));
-        things.add(new Thing(this, "fruit", R.id.btn_fruit, R.string.type_fruit_label));
-        things.add(new Thing(this, "water", R.id.btn_water, R.string.type_water_label));
+        things.add(Thing.attach(new Counter("vegetables", R.string.type_vegetables_label, R.id.btn_veg), this));
+        things.add(Thing.attach(new Counter("fruit", R.string.type_fruit_label, R.id.btn_fruit), this));
+        things.add(Thing.attach(new Counter("water", R.string.type_water_label, R.id.btn_water), this));
     }
 
     @Override
@@ -67,28 +67,33 @@ public class MainActivity extends ActionBarActivity implements DbxDatastore.Sync
         return super.onOptionsItemSelected(item);
     }
 
-    private static class Thing {
-        private final String type;
-        private Button button;
-        private String label;
+    public static class Thing {
+        private final Counter counter;
+        private final Button button;
+        private final String label;
 
-        public Thing(Activity activity, final String type, int buttonId, int labelId) {
-            this.type = type;
-            button = (Button) activity.findViewById(buttonId);
-            this.label = activity.getResources().getString(labelId);
-            button.setOnClickListener(new IncListener(type));
+        public Thing(Counter counter, Button button, String label) {
+            this.counter = counter;
+            this.button = button;
+            this.label = label;
+        }
+
+        public static Thing attach(final Counter counter, Activity activity) {
+            String label = activity.getResources().getString(counter.getLabelId());
+            Button button = (Button) activity.findViewById(counter.getButtonId());
+            button.setOnClickListener(new IncListener(counter.getType()));
             button.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Store.dec(v.getContext(), type);
+                    Store.dec(v.getContext(), counter.getType());
                     return true;
                 }
             });
-
+            return new Thing(counter, button, label);
         }
 
         public void update(Context context) {
-            button.setText(label + " " + Store.getCount(context, type));
+            button.setText(label + " " + Store.getCount(context, counter.getType()));
         }
     }
 
