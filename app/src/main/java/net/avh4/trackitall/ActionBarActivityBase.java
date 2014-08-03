@@ -27,6 +27,7 @@ public class ActionBarActivityBase extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         Analytics.activityResume(this);
+        Analytics.screen(getLocalClassName());
     }
 
     @Override
