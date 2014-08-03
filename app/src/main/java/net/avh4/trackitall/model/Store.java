@@ -99,4 +99,8 @@ public class Store {
                 .put("timestamp", now)
                 .put("ui", ui));
     }
+
+    public static String getEventsCsv() {
+        return CsvWriter.write(DropboxStore.getTable("records"));
+    }
 }
