@@ -5,12 +5,22 @@ import android.widget.Toast;
 import com.dropbox.sync.android.DbxException;
 import com.dropbox.sync.android.DbxFields;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Store {
+    private static final SimpleDateFormat YEAR_FORMAT = new SimpleDateFormat("yyyy");
+    private static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("MM");
+    private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("dd");
+
     public static Integer getCount(Context context, String type) {
+        Date now = new Date();
         try {
-            DbxFields query = new DbxFields().set("type", type);
+            DbxFields query = new DbxFields()
+                    .set("type", type)
+                    .set("year", YEAR_FORMAT.format(now))
+                    .set("month", MONTH_FORMAT.format(now))
+                    .set("day", DAY_FORMAT.format(now));
             return DropboxStore.getTable("records").query(query).count();
         } catch (DbxException e) {
             e.printStackTrace();
@@ -20,7 +30,13 @@ public class Store {
     }
 
     public static void inc(Context context, String type) {
-        DropboxStore.getTable("records").insert().set("type", type).set("timestamp", new Date());
+        Date now = new Date();
+        DropboxStore.getTable("records").insert()
+                .set("type", type)
+                .set("timestamp", now)
+                .set("year", YEAR_FORMAT.format(now))
+                .set("month", MONTH_FORMAT.format(now))
+                .set("day", DAY_FORMAT.format(now));
         try {
             DropboxStore.getStore().sync();
         } catch (DbxException e) {
