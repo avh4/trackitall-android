@@ -12,7 +12,6 @@ public class DropboxActivity extends Activity {
     private static final int REQUEST_LINK_TO_DBX = 0;
     private DbxAccountManager mAccountManager;
     private static final String APP_KEY = "e43bpvhjnjtgvtg";
-    private static final String APP_SECRET = "ip2m1xr0k2ch1if";
     public static DbxAccount account;
 
     @Override
@@ -20,7 +19,7 @@ public class DropboxActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dropbox);
 
-        mAccountManager = DbxAccountManager.getInstance(getApplicationContext(), APP_KEY, APP_SECRET);
+        mAccountManager = DbxAccountManager.getInstance(getApplicationContext(), APP_KEY, Credentials.Dropbox.APP_SECRET);
 
         Button mLinkButton = (Button) findViewById(R.id.link_button);
         mLinkButton.setOnClickListener(new View.OnClickListener() {
