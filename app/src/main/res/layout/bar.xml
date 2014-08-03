@@ -8,19 +8,19 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Veg"
+            android:text="@string/type_vegetables_label"
             android:id="@+id/btn_veg"
             />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Fruit"
+            android:text="@string/type_fruit_label"
             android:id="@+id/btn_fruit"
             />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Water"
+            android:text="@string/type_water_label"
             android:id="@+id/btn_water"
             />
 

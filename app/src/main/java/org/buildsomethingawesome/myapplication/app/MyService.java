@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MyService extends Service {
-    private static final int VEG_CODE = 1000;
+    private static final int INC_CODE = 1000;
     private static final int NID = 1;
     private Set<Thing> things = new HashSet<Thing>();
 
@@ -29,9 +29,9 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         final RemoteViews views = new RemoteViews(getPackageName(), R.layout.bar);
 
-        things.add(new Thing("vegetables", "Veg", R.id.btn_veg, views, this));
-        things.add(new Thing("fruit", "Fruit", R.id.btn_fruit, views, this));
-        things.add(new Thing("water", "Water", R.id.btn_water, views, this));
+        things.add(new Thing(this, views, "vegetables", R.id.btn_veg, R.string.type_vegetables_label));
+        things.add(new Thing(this, views, "fruit", R.id.btn_fruit, R.string.type_fruit_label));
+        things.add(new Thing(this, views, "water", R.id.btn_water, R.string.type_water_label));
 
         final NotificationManager mManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         final Notification notification = new Notification.Builder(this)
@@ -59,12 +59,12 @@ public class MyService extends Service {
         private final int buttonId;
         private final RemoteViews views;
 
-        public Thing(final String type, String label, int buttonId, RemoteViews views, Context context) {
+        public Thing(Context context, RemoteViews views, final String type, int buttonId, int labelId) {
             this.type = type;
-            this.label = label;
+            this.label = context.getResources().getString(labelId);
             this.buttonId = buttonId;
             this.views = views;
-            views.setOnClickPendingIntent(buttonId, PendingIntent.getBroadcast(context, VEG_CODE, new Intent(type), 0));
+            views.setOnClickPendingIntent(buttonId, PendingIntent.getBroadcast(context, INC_CODE, new Intent(type), 0));
             context.registerReceiver(new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {

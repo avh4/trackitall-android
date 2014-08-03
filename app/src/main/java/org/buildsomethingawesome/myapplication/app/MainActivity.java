@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import com.dropbox.sync.android.DbxDatastore;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,9 +24,9 @@ public class MainActivity extends ActionBarActivity implements DbxDatastore.Sync
         setContentView(R.layout.activity_main);
         startService(new Intent(this, MyService.class));
 
-        things.add(new Thing("vegetables", R.id.btn_veg, this, "Veg"));
-        things.add(new Thing("fruit", R.id.btn_fruit, this, "Fruit"));
-        things.add(new Thing("water", R.id.btn_water, this, "Water"));
+        things.add(new Thing(this, "vegetables", R.id.btn_veg, R.string.type_vegetables_label));
+        things.add(new Thing(this, "fruit", R.id.btn_fruit, R.string.type_fruit_label));
+        things.add(new Thing(this, "water", R.id.btn_water, R.string.type_water_label));
     }
 
     @Override
@@ -73,10 +72,10 @@ public class MainActivity extends ActionBarActivity implements DbxDatastore.Sync
         private Button button;
         private String label;
 
-        public Thing(String type, int buttonId, Activity activity, String label) {
+        public Thing(Activity activity, String type, int buttonId, int labelId) {
             this.type = type;
             button = (Button) activity.findViewById(buttonId);
-            this.label = label;
+            this.label = activity.getResources().getString(labelId);
             button.setOnClickListener(new IncListener(type));
 
         }
