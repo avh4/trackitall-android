@@ -29,9 +29,9 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         final RemoteViews views = new RemoteViews(getPackageName(), R.layout.bar);
 
-        things.add(Thing.attach(new Counter("vegetables", R.string.type_vegetables_label, R.id.btn_veg), this, views));
-        things.add(Thing.attach(new Counter("fruit", R.string.type_fruit_label, R.id.btn_fruit), this, views));
-        things.add(Thing.attach(new Counter("water", R.string.type_water_label, R.id.btn_water), this, views));
+        for (Counter counter : Counters.ALL) {
+            things.add(Thing.attach(counter, this, views));
+        }
 
         final NotificationManager mManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         final Notification notification = new Notification.Builder(this)

@@ -24,9 +24,9 @@ public class MainActivity extends ActionBarActivity implements DbxDatastore.Sync
         setContentView(R.layout.activity_main);
         startService(new Intent(this, MyService.class));
 
-        things.add(Thing.attach(new Counter("vegetables", R.string.type_vegetables_label, R.id.btn_veg), this));
-        things.add(Thing.attach(new Counter("fruit", R.string.type_fruit_label, R.id.btn_fruit), this));
-        things.add(Thing.attach(new Counter("water", R.string.type_water_label, R.id.btn_water), this));
+        for (Counter counter : Counters.ALL) {
+            things.add(Thing.attach(counter, this));
+        }
     }
 
     @Override
