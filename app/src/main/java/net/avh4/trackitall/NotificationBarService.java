@@ -12,7 +12,7 @@ import com.dropbox.sync.android.DbxDatastore;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MyService extends Service {
+public class NotificationBarService extends Service {
     private static final int INC_CODE = 1000;
     private static final int NID = 1;
     private Set<CounterRemoteButtonController> remoteButtonControllers = new HashSet<CounterRemoteButtonController>();
@@ -24,7 +24,7 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        final RemoteViews views = new RemoteViews(getPackageName(), R.layout.bar);
+        final RemoteViews views = new RemoteViews(getPackageName(), R.layout.remote_notification_bar);
 
         for (Counter counter : Counters.ALL) {
             remoteButtonControllers.add(CounterRemoteButtonController.attach(counter, this, views, INC_CODE));
@@ -40,7 +40,7 @@ public class MyService extends Service {
             @Override
             public void onDatastoreStatusChange(DbxDatastore dbxDatastore) {
                 for (CounterRemoteButtonController counterRemoteButtonController : remoteButtonControllers) {
-                    counterRemoteButtonController.update(MyService.this);
+                    counterRemoteButtonController.update(NotificationBarService.this);
                 }
                 mManager.notify(NID, notification);
             }

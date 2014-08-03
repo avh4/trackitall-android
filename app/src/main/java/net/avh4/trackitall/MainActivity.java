@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import com.dropbox.sync.android.DbxDatastore;
 
 import java.util.HashSet;
@@ -19,7 +18,7 @@ public class MainActivity extends ActionBarActivity implements DbxDatastore.Sync
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startService(new Intent(this, MyService.class));
+        startService(new Intent(this, NotificationBarService.class));
 
         for (Counter counter : Counters.ALL) {
             counterButtonControllers.add(CounterButtonController.attach(counter, this));
