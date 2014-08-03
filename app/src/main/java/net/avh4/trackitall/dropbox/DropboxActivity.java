@@ -7,11 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import com.dropbox.sync.android.DbxAccount;
 import com.dropbox.sync.android.DbxAccountManager;
+import com.segment.android.Analytics;
+import com.segment.android.models.Traits;
+import net.avh4.trackitall.ActivityBase;
 import net.avh4.trackitall.Credentials;
 import net.avh4.trackitall.R;
 import net.avh4.trackitall.app.MainActivity;
+import org.json.JSONException;
 
-public class DropboxActivity extends Activity {
+public class DropboxActivity extends ActivityBase {
     private static final int REQUEST_LINK_TO_DBX = 0;
     private DbxAccountManager mAccountManager;
     private static final String APP_KEY = "qbgqkez2zubgho2";
@@ -33,7 +37,7 @@ public class DropboxActivity extends Activity {
         });
 
         if (mAccountManager.hasLinkedAccount()) {
-            account = mAccountManager.getLinkedAccount();
+            setAccount(mAccountManager.getLinkedAccount());
             mLinkButton.setVisibility(View.GONE);
 
             startMain();
@@ -42,11 +46,25 @@ public class DropboxActivity extends Activity {
         }
     }
 
+    private void setAccount(DbxAccount linkedAccount) {
+        account = linkedAccount;
+        Traits traits = new Traits();
+        try {
+            traits = new Traits(traits
+                    .put("name", account.getAccountInfo().displayName)
+                    .put("username", account.getAccountInfo().userName)
+                    .put("orgName", account.getAccountInfo().orgName));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Analytics.identify(account.getUserId(), traits);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_LINK_TO_DBX) {
             if (resultCode == Activity.RESULT_OK) {
-                account = mAccountManager.getLinkedAccount();
+                setAccount(mAccountManager.getLinkedAccount());
 //                mLinkButton.setVisibility(View.GONE);
                 startMain();
             } else {

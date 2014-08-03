@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class MainActivity extends ActionBarActivity implements DbxDatastore.SyncStatusListener {
+public class MainActivity extends ActionBarActivityBase implements DbxDatastore.SyncStatusListener {
     private Set<CounterButtonController> counterButtonControllers = new HashSet<CounterButtonController>();
 
     @Override

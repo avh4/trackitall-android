@@ -5,6 +5,8 @@ import android.widget.Toast;
 import com.dropbox.sync.android.DbxException;
 import com.dropbox.sync.android.DbxFields;
 import com.dropbox.sync.android.DbxRecord;
+import com.segment.android.Analytics;
+import com.segment.android.models.Props;
 import net.avh4.trackitall.dropbox.DropboxStore;
 
 import java.text.SimpleDateFormat;
@@ -34,7 +36,7 @@ public class Store {
         }
     }
 
-    public static void inc(Context context, String type) {
+    public static void inc(Context context, String type, String ui) {
         Date now = new Date();
         DropboxStore.getTable("records").insert()
                 .set("type", type)
@@ -48,9 +50,13 @@ public class Store {
             e.printStackTrace();
             Toast.makeText(context, "Error syncing to Dropbox", Toast.LENGTH_LONG).show();
         }
+        Analytics.track("inc", new Props()
+                .put("type", type)
+                .put("timestamp", now)
+                .put("ui", ui));
     }
 
-    public static void dec(Context context, String type) {
+    public static void dec(Context context, String type, String ui) {
         Date now = new Date();
         DbxFields query = new DbxFields()
                 .set("type", type)
@@ -58,11 +64,14 @@ public class Store {
                 .set("month", MONTH_FORMAT.format(now))
                 .set("day", DAY_FORMAT.format(now));
 
-
         try {
             List<DbxRecord> list = DropboxStore.getTable("records").query(query).asList();
             if (list.size() == 0) {
                 Toast.makeText(context, "None left", Toast.LENGTH_LONG).show();
+                Analytics.track("dec:failed", new Props()
+                        .put("type", type)
+                        .put("timestamp", now)
+                        .put("ui", ui));
                 return;
             }
 
@@ -84,5 +93,10 @@ public class Store {
             e.printStackTrace();
             Toast.makeText(context, "Error syncing to Dropbox", Toast.LENGTH_LONG).show();
         }
+
+        Analytics.track("dec", new Props()
+                .put("type", type)
+                .put("timestamp", now)
+                .put("ui", ui));
     }
 }

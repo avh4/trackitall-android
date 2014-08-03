@@ -34,7 +34,7 @@ class CounterRemoteButtonController {
         context.registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Store.inc(context, type);
+                Store.inc(context, type, "service");
             }
         }, new IntentFilter(type));
         return new CounterRemoteButtonController(views, type, buttonId, label);

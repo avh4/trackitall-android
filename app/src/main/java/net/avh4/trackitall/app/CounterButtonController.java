@@ -25,7 +25,7 @@ public class CounterButtonController {
         button.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Store.dec(v.getContext(), counter.getType());
+                Store.dec(v.getContext(), counter.getType(), "main");
                 return true;
             }
         });
@@ -45,7 +45,7 @@ public class CounterButtonController {
 
         @Override
         public void onClick(View v) {
-            Store.inc(v.getContext(), type);
+            Store.inc(v.getContext(), type, "main");
         }
     }
 }
