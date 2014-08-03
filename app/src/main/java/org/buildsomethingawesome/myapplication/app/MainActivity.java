@@ -72,11 +72,18 @@ public class MainActivity extends ActionBarActivity implements DbxDatastore.Sync
         private Button button;
         private String label;
 
-        public Thing(Activity activity, String type, int buttonId, int labelId) {
+        public Thing(Activity activity, final String type, int buttonId, int labelId) {
             this.type = type;
             button = (Button) activity.findViewById(buttonId);
             this.label = activity.getResources().getString(labelId);
             button.setOnClickListener(new IncListener(type));
+            button.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Store.dec(v.getContext(), type);
+                    return true;
+                }
+            });
 
         }
 
