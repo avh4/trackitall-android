@@ -1,4 +1,4 @@
-package org.buildsomethingawesome.myapplication.app;
+package net.avh4.trackitall;
 
 import android.content.Context;
 import android.widget.Toast;

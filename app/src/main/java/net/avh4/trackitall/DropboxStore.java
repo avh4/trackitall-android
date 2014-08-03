@@ -1,4 +1,4 @@
-package org.buildsomethingawesome.myapplication.app;
+package net.avh4.trackitall;
 
 import com.dropbox.sync.android.DbxDatastore;
 import com.dropbox.sync.android.DbxException;

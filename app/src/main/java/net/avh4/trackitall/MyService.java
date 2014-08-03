@@ -1,4 +1,4 @@
-package org.buildsomethingawesome.myapplication.app;
+package net.avh4.trackitall;
 
 import android.app.Notification;
 import android.app.NotificationManager;
