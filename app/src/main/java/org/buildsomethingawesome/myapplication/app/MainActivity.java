@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity implements DbxDatastore.Sync
 
         things.add(new Thing("vegetables", R.id.btn_veg, this, "Veg"));
         things.add(new Thing("fruit", R.id.btn_fruit, this, "Fruit"));
+        things.add(new Thing("water", R.id.btn_water, this, "Water"));
     }
 
     @Override

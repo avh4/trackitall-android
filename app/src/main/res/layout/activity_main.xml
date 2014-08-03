@@ -19,6 +19,11 @@
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Water"
+                android:id="@+id/btn_water"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Carbs"
                 android:id="@+id/btn_carbs"/>
         <Button
