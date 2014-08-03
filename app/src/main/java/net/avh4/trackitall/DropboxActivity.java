@@ -11,7 +11,7 @@ import com.dropbox.sync.android.DbxAccountManager;
 public class DropboxActivity extends Activity {
     private static final int REQUEST_LINK_TO_DBX = 0;
     private DbxAccountManager mAccountManager;
-    private static final String APP_KEY = "e43bpvhjnjtgvtg";
+    private static final String APP_KEY = "qbgqkez2zubgho2";
     public static DbxAccount account;
 
     @Override
