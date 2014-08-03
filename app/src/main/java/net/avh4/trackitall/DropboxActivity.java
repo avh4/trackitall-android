@@ -17,7 +17,7 @@ public class DropboxActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dropbox);
+        setContentView(R.layout.activity_dropbox);
 
         mAccountManager = DbxAccountManager.getInstance(getApplicationContext(), APP_KEY, Credentials.Dropbox.APP_SECRET);
 
