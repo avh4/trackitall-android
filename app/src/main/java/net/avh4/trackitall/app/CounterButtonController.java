@@ -1,9 +1,11 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.app;
 
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
+import net.avh4.trackitall.model.Counter;
+import net.avh4.trackitall.model.Store;
 
 public class CounterButtonController {
     private final Counter counter;

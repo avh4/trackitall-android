@@ -1,4 +1,4 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.dropbox;
 
 import com.dropbox.sync.android.DbxDatastore;
 import com.dropbox.sync.android.DbxException;

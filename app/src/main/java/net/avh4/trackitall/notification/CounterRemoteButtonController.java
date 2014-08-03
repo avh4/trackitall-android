@@ -1,4 +1,4 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.notification;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.widget.RemoteViews;
+import net.avh4.trackitall.model.Counter;
+import net.avh4.trackitall.model.Store;
 
 class CounterRemoteButtonController {
     private final String type;

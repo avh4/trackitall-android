@@ -1,4 +1,4 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.model;
 
 public class Counter {
     private final String type;

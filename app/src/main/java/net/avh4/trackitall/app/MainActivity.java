@@ -1,4 +1,4 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.dropbox.sync.android.DbxDatastore;
+import net.avh4.trackitall.*;
+import net.avh4.trackitall.dropbox.DropboxStore;
+import net.avh4.trackitall.model.Counter;
+import net.avh4.trackitall.model.Counters;
+import net.avh4.trackitall.notification.NotificationBarService;
 
 import java.util.HashSet;
 import java.util.Set;

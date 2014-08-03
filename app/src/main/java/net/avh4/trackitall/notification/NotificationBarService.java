@@ -1,4 +1,4 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.notification;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,6 +8,10 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 import com.dropbox.sync.android.DbxDatastore;
+import net.avh4.trackitall.model.Counter;
+import net.avh4.trackitall.model.Counters;
+import net.avh4.trackitall.dropbox.DropboxStore;
+import net.avh4.trackitall.R;
 
 import java.util.HashSet;
 import java.util.Set;

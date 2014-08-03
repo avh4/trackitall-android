@@ -1,4 +1,6 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.model;
+
+import net.avh4.trackitall.R;
 
 public interface Counters {
     public static final Counter[] ALL = {

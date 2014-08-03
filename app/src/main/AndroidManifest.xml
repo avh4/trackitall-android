@@ -10,7 +10,7 @@
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
-        <activity android:name=".DropboxActivity">
+        <activity android:name=".dropbox.DropboxActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -18,11 +18,11 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".app.MainActivity"
                 android:label="@string/app_name">
         </activity>
 
-        <service android:enabled="true" android:name=".NotificationBarService"/>
+        <service android:enabled="true" android:name=".notification.NotificationBarService"/>
 
         <!-- Dropbox -->
         <activity android:name="com.dropbox.sync.android.DbxAuthActivity"/>

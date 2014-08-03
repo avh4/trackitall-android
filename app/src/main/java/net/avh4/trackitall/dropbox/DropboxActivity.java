@@ -1,4 +1,4 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.dropbox;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import com.dropbox.sync.android.DbxAccount;
 import com.dropbox.sync.android.DbxAccountManager;
+import net.avh4.trackitall.Credentials;
+import net.avh4.trackitall.R;
+import net.avh4.trackitall.app.MainActivity;
 
 public class DropboxActivity extends Activity {
     private static final int REQUEST_LINK_TO_DBX = 0;

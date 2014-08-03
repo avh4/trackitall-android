@@ -1,10 +1,11 @@
-package net.avh4.trackitall;
+package net.avh4.trackitall.model;
 
 import android.content.Context;
 import android.widget.Toast;
 import com.dropbox.sync.android.DbxException;
 import com.dropbox.sync.android.DbxFields;
 import com.dropbox.sync.android.DbxRecord;
+import net.avh4.trackitall.dropbox.DropboxStore;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
