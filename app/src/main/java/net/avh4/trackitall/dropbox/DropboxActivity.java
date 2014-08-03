@@ -78,5 +78,6 @@ public class DropboxActivity extends ActivityBase {
     private void startMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }
