@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 import com.dropbox.sync.android.DbxDatastore;
+import com.segment.android.Analytics;
 import net.avh4.trackitall.model.Counter;
 import net.avh4.trackitall.model.Counters;
 import net.avh4.trackitall.dropbox.DropboxStore;
@@ -55,11 +56,26 @@ public class NotificationBarService extends Service {
                 mManager.notify(NID, notification);
             }
         });
+
+        Analytics.track("service:created");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground(NID, notification);
+        Analytics.track("service:start");
         return START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+        Analytics.track("service:destroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        Analytics.track("service:low_memory");
+        super.onLowMemory();
     }
 }
