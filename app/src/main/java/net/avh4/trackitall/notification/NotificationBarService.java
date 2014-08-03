@@ -20,6 +20,7 @@ public class NotificationBarService extends Service {
     private static final int INC_CODE = 1000;
     private static final int NID = 1;
     private Set<CounterRemoteButtonController> remoteButtonControllers = new HashSet<CounterRemoteButtonController>();
+    private Notification notification;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -27,7 +28,9 @@ public class NotificationBarService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public void onCreate() {
+        super.onCreate();
+
         final RemoteViews views = new RemoteViews(getPackageName(), R.layout.remote_notification_bar);
 
         for (Counter counter : Counters.ALL) {
@@ -35,9 +38,10 @@ public class NotificationBarService extends Service {
         }
 
         final NotificationManager mManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        final Notification notification = new Notification.Builder(this)
+        notification = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContent(views)
+                .setPriority(Notification.PRIORITY_MIN)
                 .build();
 
         DropboxStore.getStore().addSyncStatusListener(new DbxDatastore.SyncStatusListener() {
@@ -49,9 +53,11 @@ public class NotificationBarService extends Service {
                 mManager.notify(NID, notification);
             }
         });
+    }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground(NID, notification);
         return START_STICKY;
     }
-
 }
