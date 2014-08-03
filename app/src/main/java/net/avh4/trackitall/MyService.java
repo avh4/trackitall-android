@@ -29,9 +29,9 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         final RemoteViews views = new RemoteViews(getPackageName(), R.layout.bar);
 
-        things.add(new Thing(this, views, "vegetables", R.id.btn_veg, R.string.type_vegetables_label));
-        things.add(new Thing(this, views, "fruit", R.id.btn_fruit, R.string.type_fruit_label));
-        things.add(new Thing(this, views, "water", R.id.btn_water, R.string.type_water_label));
+        things.add(Thing.attach(new Counter("vegetables", R.string.type_vegetables_label, R.id.btn_veg), this, views));
+        things.add(Thing.attach(new Counter("fruit", R.string.type_fruit_label, R.id.btn_fruit), this, views));
+        things.add(Thing.attach(new Counter("water", R.string.type_water_label, R.id.btn_water), this, views));
 
         final NotificationManager mManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         final Notification notification = new Notification.Builder(this)
@@ -59,11 +59,21 @@ public class MyService extends Service {
         private final int buttonId;
         private final RemoteViews views;
 
-        public Thing(Context context, RemoteViews views, final String type, int buttonId, int labelId) {
+        private Thing(RemoteViews views, final String type, int buttonId, String label) {
             this.type = type;
-            this.label = context.getResources().getString(labelId);
+            this.label = label;
             this.buttonId = buttonId;
             this.views = views;
+        }
+
+        public void update(Context context) {
+            views.setTextViewText(buttonId, label + " " + Store.getCount(context, type));
+        }
+
+        public static Thing attach(Counter counter, Context context, RemoteViews views) {
+            final String type = counter.getType();
+            int buttonId = counter.getButtonId();
+            String label = context.getResources().getString(counter.getLabelId());
             views.setOnClickPendingIntent(buttonId, PendingIntent.getBroadcast(context, INC_CODE, new Intent(type), 0));
             context.registerReceiver(new BroadcastReceiver() {
                 @Override
@@ -71,10 +81,7 @@ public class MyService extends Service {
                     Store.inc(context, type);
                 }
             }, new IntentFilter(type));
-        }
-
-        public void update(Context context) {
-            views.setTextViewText(buttonId, label + " " + Store.getCount(context, type));
+            return new Thing(views, type, buttonId, label);
         }
     }
 }
