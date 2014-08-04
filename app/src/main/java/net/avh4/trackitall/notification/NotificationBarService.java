@@ -17,11 +17,12 @@ import net.avh4.trackitall.R;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NotificationBarService extends Service {
+public class NotificationBarService extends Service implements DbxDatastore.SyncStatusListener {
     private static final int INC_CODE = 1000;
     private static final int NID = 1;
     private Set<CounterRemoteButtonController> remoteButtonControllers = new HashSet<CounterRemoteButtonController>();
     private Notification notification;
+    private NotificationManager notificationManager;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -38,7 +39,7 @@ public class NotificationBarService extends Service {
             remoteButtonControllers.add(CounterRemoteButtonController.attach(counter, this, views, INC_CODE));
         }
 
-        final NotificationManager mManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         notification = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContent(views)
@@ -47,17 +48,18 @@ public class NotificationBarService extends Service {
                 .setOngoing(true)
                 .build();
 
-        DropboxStore.getStore().addSyncStatusListener(new DbxDatastore.SyncStatusListener() {
-            @Override
-            public void onDatastoreStatusChange(DbxDatastore dbxDatastore) {
-                for (CounterRemoteButtonController counterRemoteButtonController : remoteButtonControllers) {
-                    counterRemoteButtonController.update(NotificationBarService.this);
-                }
-                mManager.notify(NID, notification);
-            }
-        });
+        DropboxStore.getStore().addSyncStatusListener(this);
+        this.onDatastoreStatusChange(null);
 
         Analytics.track("service:created");
+    }
+
+    @Override
+    public void onDatastoreStatusChange(DbxDatastore datastore) {
+        for (CounterRemoteButtonController counterRemoteButtonController : remoteButtonControllers) {
+            counterRemoteButtonController.update(NotificationBarService.this);
+        }
+        notificationManager.notify(NID, notification);
     }
 
     @Override
