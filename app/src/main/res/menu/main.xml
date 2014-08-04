@@ -3,9 +3,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="net.avh4.trackitall.app.MainActivity">
     <item android:id="@+id/action_export"
-          android:title="@string/action_export"
-          android:icon="@android:drawable/ic_menu_share"
-          android:showAsAction="always|withText"/>
+          android:title="@string/action_export"/>
     <item android:id="@+id/action_settings"
           android:title="@string/action_settings"
           android:orderInCategory="100"
