@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="FlurryAnalytics-4.1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/exploded-aar/io.segment.analytics.android/all/1.4.0/libs/FlurryAnalytics-4.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
