@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Tapstream-2.7.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/exploded-aar/io.segment.analytics.android/all/1.4.0/libs/Tapstream-2.7.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/build/exploded-aar/io.segment.analytics.android/all/1.4.1/libs/Tapstream-2.7.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

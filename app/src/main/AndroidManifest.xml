@@ -47,6 +47,7 @@
                 android:enabled="true"
                 android:exported="false"
                 android:label="Dropbox Sync"/>
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="FILL_IN"/>
     </application>
 
 </manifest>

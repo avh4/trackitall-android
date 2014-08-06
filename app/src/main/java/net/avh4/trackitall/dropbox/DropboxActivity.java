@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.crashlytics.android.Crashlytics;
 import com.dropbox.sync.android.DbxAccount;
 import com.dropbox.sync.android.DbxAccountManager;
 import com.segment.android.Analytics;
@@ -24,6 +25,7 @@ public class DropboxActivity extends ActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
         setContentView(R.layout.activity_dropbox);
 
         mAccountManager = DbxAccountManager.getInstance(getApplicationContext(), APP_KEY, Credentials.Dropbox.APP_SECRET);

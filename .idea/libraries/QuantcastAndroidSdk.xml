@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="QuantcastAndroidSdk">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/exploded-aar/io.segment.analytics.android/all/1.4.0/libs/QuantcastAndroidSdk.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/build/exploded-aar/io.segment.analytics.android/all/1.4.1/libs/QuantcastAndroidSdk.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="all-1.4.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/exploded-aar/io.segment.analytics.android/all/1.4.1/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/exploded-aar/io.segment.analytics.android/all/1.4.1/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
