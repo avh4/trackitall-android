@@ -29,11 +29,28 @@ public class DropboxActivity extends ActivityBase {
         setContentView(R.layout.activity_dropbox);
 
         mAccountManager = DbxAccountManager.getInstance(getApplicationContext(), APP_KEY, Credentials.Dropbox.APP_SECRET);
+        mAccountManager.addListener(new DbxAccountManager.AccountListener() {
+            @Override
+            public void onLinkedAccountChange(DbxAccountManager dbxAccountManager, DbxAccount dbxAccount) {
+                mAccountManager.removeListener(this);
+                System.out.println(dbxAccount.getAccountInfo());
+                dbxAccount.addListener(new DbxAccount.Listener() {
+                    @Override
+                    public void onAccountChange(DbxAccount dbxAccount) {
+                        System.out.println(dbxAccount.getAccountInfo());
+                        dbxAccount.removeListener(this);
+                        setAccount(dbxAccount);
+                        startMain();
+                    }
+                });
+            }
+        });
 
-        Button mLinkButton = (Button) findViewById(R.id.link_button);
+        final Button mLinkButton = (Button) findViewById(R.id.link_button);
         mLinkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLinkButton.setVisibility(View.GONE);
                 mAccountManager.startLink(DropboxActivity.this, REQUEST_LINK_TO_DBX);
             }
         });
@@ -59,6 +76,7 @@ public class DropboxActivity extends ActivityBase {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Analytics.alias(Analytics.getAnonymousId(), account.getUserId());
         Analytics.identify(account.getUserId(), traits);
     }
 
@@ -66,9 +84,8 @@ public class DropboxActivity extends ActivityBase {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_LINK_TO_DBX) {
             if (resultCode == Activity.RESULT_OK) {
-                setAccount(mAccountManager.getLinkedAccount());
-//                mLinkButton.setVisibility(View.GONE);
-                startMain();
+//                setAccount(mAccountManager.getLinkedAccount());
+//                startMain();
             } else {
                 // ... Link failed or was cancelled by the user.
             }
